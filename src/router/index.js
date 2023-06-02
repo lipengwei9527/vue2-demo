@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import reRouter from '@/utils/reRouter.js'
+import reRouter from '@/utils/router.js'
 Vue.use(reRouter)
 const router = new reRouter({
   // 在没有后端传递路由的时候使用hash模式，刷新界面不会找不到路由
@@ -16,6 +16,10 @@ const router = new reRouter({
         {
           path: 'dom',
           component: () => import('@/views/dom/index.vue')
+        },
+        {
+          path: 'test',
+          component: () => import('@/views/testPage/testPage.vue')
         },
       ],
       redirect: 'echarts'

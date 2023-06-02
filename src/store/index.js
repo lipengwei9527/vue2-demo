@@ -17,7 +17,7 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    getUserInfo (contextF) {
+    getUserInfo (context) {
       console.log("getUserInfo", state)
     }
   },

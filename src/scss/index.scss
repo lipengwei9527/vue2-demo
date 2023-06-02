@@ -1,7 +1,15 @@
-$font: 18px;
-$family: 20px;
+@import './theme-variables.scss';
 
 * {
-  font-size: $font;
-  // font-family: 'KaiTi';
+  font-size: $-font-size;
+}
+
+.page {
+  padding: 10px;
+}
+
+.page-content {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
 }

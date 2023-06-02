@@ -1,7 +1,7 @@
 import VueRouter from 'vue-router'
 //先把VueRouter.prototype身上的push|replace方法进行保存一份
-export let orgPush = VueRouter.prototype.push;
-export let orgReplace = VueRouter.prototype.replace;
+export const orgPush = VueRouter.prototype.push;
+export const orgReplace = VueRouter.prototype.replace;
 //重写VueRouter.prototype身上的push方法了
 VueRouter.prototype.push = function (location, resolve, reject) {
   //第一个形参：路由跳转的配置对象（query|params）
