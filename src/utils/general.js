@@ -45,3 +45,24 @@ export function debounce (delay = 2, callback, ...arg) {
 export function throttle (delay = 2, callback, ...arg) {
   return callback(...arg)
 }
+/**
+ * 重设element-ui中的表格高度
+ * @param {组件this} _this 
+ * @param {组件绑定的ref名字} refName 
+ * @param {距离窗口底部的高度} height 
+ */
+export function resetTableHeight (_this, refName, height = 0) {
+  setTimeout(() => {
+    let table = _this.$refs[refName]
+    if (table) {
+      table.maxHeightTable = window.innerHeight - table.$el.getBoundingClientRect().y - height
+    }
+  }, 50);
+}
+
+export default {
+  splitList,
+  debounce,
+  throttle,
+  resetTableHeight
+}

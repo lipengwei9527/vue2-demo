@@ -40,3 +40,7 @@ export function treeTransData (data) {
   return res
 }
 
+export default {
+  dataTransTree,
+  treeTransData
+}

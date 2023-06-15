@@ -1,8 +1,17 @@
 const state = {
-  userName: 'lpw',
-  userId: 123
+  userInfo: {
+    name: '李四',
+    age: 18,
+    sex: 1
+  }
 }
+const getters = {}
+const mutations = {}
+const actions = {}
 export default {
   namespaced: true,
-  state
+  state,
+  getters,
+  mutations,
+  actions
 }
