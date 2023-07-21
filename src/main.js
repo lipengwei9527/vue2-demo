@@ -10,11 +10,13 @@ import '@/scss/index.scss'
 import * as echarts from 'echarts'
 // 全局组件
 import '@/components'
-// 绑定到Vue.prototype的公共方法
+// 要绑定到vue上的方法统一写在该文件下
 import '@/utils'
 
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
+Vue.prototype.$bus = new Vue()
+
 Vue.use(elementUi)
 
 new Vue({

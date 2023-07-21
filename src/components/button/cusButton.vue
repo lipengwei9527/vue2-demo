@@ -1,6 +1,6 @@
 <template>
   <div class="cus-button">
-    <el-button :size="size" :type="type" @click="clickFn">
+    <el-button :size="size" :type="type" @click="click">
       <slot></slot>
     </el-button>
   </div>
@@ -55,10 +55,15 @@ export default {
   },
   created() {},
   methods: {
-    clickFn() {
-      this.$emit('click', 4, 5, 6, 7, 8, 9)
+    click() {
+      this.$emit('click')
     },
   },
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.cus-button {
+  display: inline-block;
+  margin: 7px 7px 7px 0;
+}
+</style>

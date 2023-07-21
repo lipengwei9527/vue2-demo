@@ -1,30 +1,34 @@
 const { defineConfig } = require('@vue/cli-service')
 const { resolve } = require('path')
-// console.log("环境变量", process.env)
+const serverConfig = require('./config/serverConfig.js')
 module.exports = defineConfig({
   transpileDependencies: true,
   // 默认打包路径
   outputDir: 'build',
   // 指定index.html打包后的路径及文件名
   indexPath: './html/index.html',
-  publicPath: './',
   devServer: {
-    host: 'localhost',
+    host: '127.0.0.1',
     port: '8080',
+    open: false,
     proxy: {
-      '/api': {
-        target: 'http://localhost:8080',
-        pathRewrite: { '^/api': '' }
-      }
+      ...serverConfig.proxy,
     }
   },
   css: {
+    // 热重载:true-关闭热重载,false-打开热重载
     extract: false,
     // // css文件名后加8位哈希值
     // extract: {
     //   filename: './css/[name]&[hash:8].css',
     //   chunkFilename: './css/[name]&[hash:8].css',
     // }
+    loaderOptions: {
+      sass: {
+        // 传入全局scss变量
+        additionalData: `@import "@/scss/variate.scss";`
+      },
+    }
 
   },
   chainWebpack (config) {
@@ -33,10 +37,11 @@ module.exports = defineConfig({
     config.output
       .filename('./js/[name]&[hash:8].js')
       .chunkFilename('./js/[name]&[hash:8].js')
-    // 路径
+    // 相对路径别名
     config.resolve.alias
-      .set('@', resolve(__dirname, 'src'))
+      .set('@', resolve('src'))
+      .set('@config', resolve('config'))
   },
-  // 打包输出map文件
+  // 打包是否输出map文件
   productionSourceMap: false
 })

@@ -1,5 +1,6 @@
+// 全局所有的scss文件都创建在该文件夹下，方便查找
 // 全局公共样式变量
-@import './theme-variables.scss';
+@import './variate.scss';
 // 滚动条样式
 @import './scrollbar.scss';
 // 字体样式
@@ -7,6 +8,8 @@
 
 // 全局公共样式
 * {
+  padding: 0;
+  margin: 0;
   font-size: $-font-size-14;
   color: $-color-000000;
 }

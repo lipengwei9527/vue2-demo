@@ -193,10 +193,79 @@
                 <div v-else>
                   {{
                     scope.row[item2.prop]
-                      ? scope.row[item2.prop]
+                      ? item2.timeFormat
+                        ? $formatDate(scope.row[item2.prop], item2.timeFormat)
+                        : scope.row[item2.prop]
                       : defaultCellText
                   }}
                 </div>
+              </template>
+              <template v-for="(item3, index3) in item2.children">
+                <el-table-column
+                  :key="`${item3.prop}_${item3.label}_${index3}`"
+                  :label="item3.label"
+                  :prop="item3.prop"
+                  :column-key="item3.columnKey"
+                  :width="item3.width"
+                  :min-width="item3.minWidth"
+                  :fixed="item3.fixed"
+                  :render-header="item3.renderHeader"
+                  :sortable="item3.sortable"
+                  :sort-method="item3.sortMethod"
+                  :sort-by="item3.sortBy"
+                  :sort-orders="item3.sortOrders"
+                  :resizable="item3.resizable"
+                  :formatter="item3.formatter"
+                  :show-overflow-tooltip="
+                    item3.showOverflowTooltip
+                      ? item3.showOverflowTooltip
+                      : showOverflowTooltip
+                  "
+                  :align="item3.align ? item3.align : align"
+                  :header-align="
+                    item3.headerAlign
+                      ? item3.headerAlign
+                      : item3.align
+                      ? item3.align
+                      : align
+                  "
+                  :class-name="item3.className"
+                  :label-class-name="item3.labelClassName"
+                  :filters="item3.filters"
+                  :filter-placement="item3.filterPlacement"
+                  :filter-multiple="item3.filterMultiple"
+                  :filter-method="item3.filterMethod"
+                  :filtered-value="item3.filteredValue"
+                >
+                  <template slot="header" slot-scope="scope">
+                    <slot
+                      v-if="headSlots.indexOf('head-' + item3.prop) != -1"
+                      :name="'head-' + item3.prop"
+                      v-bind="scope"
+                    ></slot>
+                    <div v-else>{{ scope.column.label }}</div>
+                  </template>
+
+                  <template slot-scope="scope">
+                    <slot
+                      v-if="colSlots.indexOf(item3.prop) != -1"
+                      :name="item3.prop"
+                      v-bind="scope"
+                    ></slot>
+                    <div v-else>
+                      {{
+                        scope.row[item3.prop]
+                          ? item3.timeFormat
+                            ? $formatDate(
+                                scope.row[item3.prop],
+                                item3.timeFormat
+                              )
+                            : scope.row[item3.prop]
+                          : defaultCellText
+                      }}
+                    </div>
+                  </template>
+                </el-table-column>
               </template>
             </el-table-column>
           </template>

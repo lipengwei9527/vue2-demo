@@ -5,17 +5,20 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'App',
   data() {
     return {}
   },
+  computed: {
+    ...mapState('app', ['appState']),
+  },
   created() {
-    this.setPageState()
+    this.setAppState()
   },
   methods: {
-    ...mapActions('app', ['setPageState']),
+    ...mapActions('app', ['setAppState']),
   },
 }
 </script>
