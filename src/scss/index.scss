@@ -1,8 +1,8 @@
 // 全局所有的scss文件都创建在该文件夹下，方便查找
 // 全局公共样式变量
-@import './variate.scss';
+@import "./variate.scss";
 // 滚动条样式
-@import './scrollbar.scss';
+@import "./scrollbar.scss";
 
 /**********************全局布局样式****************************/
 
@@ -27,15 +27,10 @@ body {
 
 // 整体布局
 .layout {
-  height: 100%;
-  display: flex;
-  overflow: auto;
-  background-color: #f0f2f5;
-
-  // 左侧菜单
-  .left-tab {
-    width: 20%;
-  }
+  // height: 100%;
+  // display: flex;
+  // overflow: auto;
+  // background-color: #f0f2f5;
 
   // 一级菜单
   .g-h1 {

@@ -1,15 +1,11 @@
 <template>
-  <el-submenu
-    v-if="menu.children && menu.children.length != 0"
-    :index="menu.path"
-    :key="menu.path"
-  >
+  <el-submenu v-if="menu.children?.length" :index="menu.path" :key="menu.path">
     <template slot="title">{{ menu.title }}</template>
-    <menu-item
+    <menu-tree
       v-for="(item, index) in menu.children"
       :key="item.path + index"
       :menu="item"
-    ></menu-item>
+    ></menu-tree>
   </el-submenu>
 
   <el-menu-item v-else :index="menu.path" :key="menu.path">
@@ -18,7 +14,7 @@
 </template>
 <script>
 export default {
-  name: 'menuItem',
+  name: "menuTree",
   props: {
     menu: {
       type: Object,
@@ -26,10 +22,10 @@ export default {
     },
   },
   data() {
-    return {}
+    return {};
   },
   created() {},
   methods: {},
-}
+};
 </script>
 <style lang="scss" scoped></style>

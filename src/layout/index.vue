@@ -1,7 +1,6 @@
 <template>
   <div class="layout">
     <c-menu
-      class="left-tab"
       :mode="mode"
       :menuList="menuList"
       :activeIndex="activeIndex"
@@ -19,7 +18,7 @@ export default {
   name: "layout",
   data() {
     return {
-      mode: "vertical", //vertical horizontal
+      mode: "horizontal", //vertical horizontal
       activeIndex: "0",
       path: "",
       cacheViews: [], //缓存的路由

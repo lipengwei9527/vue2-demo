@@ -5,24 +5,24 @@
     :default-active="activeIndex"
     @select="select"
   >
-    <menu-item
+    <menu-tree
       v-for="(menuItem, menuIndex) in menuList"
       :key="menuItem.path + menuIndex"
       :menu="menuItem"
-    ></menu-item>
+    ></menu-tree>
   </el-menu>
 </template>
 <script>
-import menuItem from './menuItem'
+import menuTree from "./menuTree.vue";
 export default {
-  name: 'CMenu',
+  name: "CMenu",
   components: {
-    menuItem,
+    menuTree,
   },
   props: {
     mode: {
       type: String,
-      default: 'horizontal',
+      default: "horizontal",
     },
     collapse: {
       type: Boolean,
@@ -30,7 +30,7 @@ export default {
     },
     activeIndex: {
       type: String,
-      default: '0',
+      default: "0",
     },
     menuList: {
       type: Array,
@@ -38,15 +38,15 @@ export default {
     },
   },
   data() {
-    return {}
+    return {};
   },
   created() {},
   methods: {
     select(index, indexPath) {
-      this.$emit('select', index, indexPath)
+      this.$emit("select", index, indexPath);
     },
   },
-}
+};
 </script>
 <style lang="scss">
 .el-menu-item {
