@@ -36,7 +36,20 @@ export default {
         {
           title: "样式",
           path: "/inputcss",
-          children: [{ title: "inputcss", path: "/style/inputcss" }],
+          children: [
+            { title: "inputcss", path: "/style/inputcss" },
+            { title: "css2", path: "/style/css2" },
+            {
+              title: "css3",
+              path: "/style/css3",
+              children: [
+                {
+                  title: "css3-1",
+                  path: "/style/css3-1",
+                },
+              ],
+            },
+          ],
         },
       ],
     };

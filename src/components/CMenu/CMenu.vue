@@ -5,11 +5,7 @@
     :default-active="activeIndex"
     @select="select"
   >
-    <menu-tree
-      v-for="(menuItem, menuIndex) in menuList"
-      :key="menuItem.path + menuIndex"
-      :menu="menuItem"
-    ></menu-tree>
+    <menu-tree :menuList="menuList"></menu-tree>
   </el-menu>
 </template>
 <script>
