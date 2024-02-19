@@ -12,9 +12,11 @@ export function dataTransTree (data, rootId = 0, level = -1, pidKey = 'pid', idK
   data.forEach(item => {
     if (item[pidKey] == rootId) {
       if (level >= 0 && !item.level) item.level = level++
+
       arr.push(item)
       let tempArr = data.filter(item => item[pidKey] !== rootId)
       let children = dataTransTree(tempArr, pidKey, item[idKey], level)
+
       if (children.length !== 0) {
         item.children = children
       }
@@ -32,6 +34,7 @@ export function treeTransData (data) {
   data.forEach(item => {
     let { children, ...obj } = item
     res.push(obj)
+
     if (children && children.length != 0) {
       let arr = treeTransData(children)
       res.push(...arr)
@@ -40,7 +43,3 @@ export function treeTransData (data) {
   return res
 }
 
-export default {
-  dataTransTree,
-  treeTransData
-}

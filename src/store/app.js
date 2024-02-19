@@ -41,6 +41,14 @@ const mutations = {
         state.appState.isFullScreen = false
       }
     })
+
+    // console.log('app当前状态：' + '\n'
+    //   + '   版本：' + state.appState.version + '\n'
+    //   + '   页面是否可见：' + state.appState.visibilityState + '\n'
+    //   + '   焦点是否在该页面：' + state.appState.isFocus + '\n'
+    //   + '   是否联网：' + state.appState.onLine + '\n'
+    //   + '   是否全屏：' + state.appState.isFullScreen + '\n'
+    // )
   },
 }
 const actions = {

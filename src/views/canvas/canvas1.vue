@@ -1,9 +1,9 @@
 <template>
-  <div class="global-dialog">全局弹窗</div>
+  <div class="canvas">初试canvas</div>
 </template>
 <script>
 export default {
-  name: 'globalDialog',
+  name: 'canvas1',
   data() {
     return {}
   },

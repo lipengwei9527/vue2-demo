@@ -1,6 +1,6 @@
 import moment from 'moment'
-import general from './general.js'
-import validate from './validate.js'
+import { getAssignChar } from './general.js'
+import { isThousands } from './validate.js'
 // 时间格式化
 /***********************************************************/
 /**
@@ -9,9 +9,8 @@ import validate from './validate.js'
  * @param {转换之后的格式} format 
 */
 export function formatDate (value, format = 'yyyy-MM-DD') {
-  if (!value || value == null) {
-    throw new Error('value不存在或为null')
-  }
+  if (!value || value == null) return
+
   if (Number(value) == value) {
     // moment不能转换字符串类型的时间戳，要先转换成数字再格式化
     return moment(Number(value)).format(format)
@@ -47,14 +46,15 @@ export function digitToThousands (num, length) {
   if (arr.length == 2) {
     let decimal = arr[1].replace(/\,/g, '')
     length = length ? length : decimal.length
-    decimal = general.getAssignChar(decimal, length)
+    decimal = getAssignChar(decimal, length)
     return arr[0] + '.' + decimal
   }
   if (length) {
-    return res + '.' + general.getAssignChar('', length)
+    return res + '.' + getAssignChar('', length)
   }
   return res
 }
+
 /**
  * 千分位转化为数字格式的字符串
  * @param {要转换的千分位格式} str 
@@ -62,16 +62,10 @@ export function digitToThousands (num, length) {
  * @returns {String}
  */
 export function thousandsToDigit (str, length) {
-  if (!validate.isThousands(str)) {
+  if (!isThousands(str)) {
     throw new Error('不是千分位格式')
   }
   return Number(str.replace(/\,/g, '')).toFixed(length)
 }
 /***********************************************************/
 
-export default {
-  formatDate,
-  curDate,
-  digitToThousands,
-  thousandsToDigit
-}

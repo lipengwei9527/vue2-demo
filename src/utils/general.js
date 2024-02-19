@@ -19,6 +19,7 @@ export function splitList (nodeList, targetList) {
     let res = targetList.findIndex(item2 => {
       return item2 == item1
     });
+
     if (res != -1) {
       end = res
       if (end != start) {
@@ -31,12 +32,14 @@ export function splitList (nodeList, targetList) {
   let lastSameIndex = 0
   nodeList.forEach(item => {
     let res = targetList.lastIndexOf(item)
+
     if (res != -1) {
       lastSameIndex = res + 1
     }
   })
 
   let lastEle = targetList.slice(lastSameIndex)
+
   if (lastEle.length != 0) {
     arr.push(lastEle)
   }
@@ -215,14 +218,3 @@ export function show () {
   Message.error('报错')
 }
 
-export default {
-  splitList,
-  debounce,
-  debounceIsImmediate,
-  debounceNotImmediate,
-  throttle,
-  resetTableHeight,
-  getAssignChar,
-  deepClone,
-  refreshApp
-}

@@ -3,15 +3,56 @@
 @import './variate.scss';
 // 滚动条样式
 @import './scrollbar.scss';
-// 字体样式
-@import './font.scss';
 
-// 全局公共样式
+/**********************全局布局样式****************************/
+
 * {
   padding: 0;
   margin: 0;
-  font-size: $-font-size-14;
-  color: $-color-000000;
+  font-size: $mainText_fontSize;
+  color: $mainText_color;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+}
+
+// 整体布局
+.layout {
+  height: 100%;
+  display: flex;
+  overflow: auto;
+  background-color: #f0f2f5;
+
+  // 左侧菜单
+  .left-tab {
+    width: 20%;
+  }
+
+  // 一级菜单
+  .g-h1 {
+    font-size: $h4_fontSize;
+    font-weight: 600;
+  }
+
+  /***********************************************************/
+
+  /*******************交易页面样式***************************/
+  .trade-page {
+    flex: 1;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+  }
 }
 
 .page {
@@ -23,6 +64,14 @@
   border-radius: 5px;
   padding: 10px;
 }
+
+// 一级标题
+.p-h1 {
+  font-size: $h4_fontSize;
+  font-weight: 600;
+}
+
+/**********************************************/
 
 /***********超出指定行行隐藏****************/
 .hide-more-one {
@@ -62,7 +111,4 @@
   text-overflow: ellipsis;
 }
 
-/*************************************/
-// .test {
-//   border-image: linear-gradient();
-// }
+/**********************************************/

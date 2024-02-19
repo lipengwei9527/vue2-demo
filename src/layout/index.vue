@@ -1,34 +1,55 @@
 <template>
   <div class="layout">
-    <!-- <app-header></app-header> -->
-    <cus-button @click="fn1">测试</cus-button>
-    <router-view></router-view>
+    <c-menu
+      class="left-tab"
+      :mode="mode"
+      :menuList="menuList"
+      :activeIndex="activeIndex"
+      @select="select"
+    ></c-menu>
+    <div class="trade-page">
+      <keep-alive :max="10" :include="cacheViews">
+        <router-view :to="path"></router-view>
+      </keep-alive>
+    </div>
   </div>
 </template>
 <script>
-import { appHeader } from './components'
-import { testapi } from '@/axios/app.js'
 export default {
-  name: 'layout',
-  components: { appHeader },
+  name: "layout",
   data() {
-    return {}
+    return {
+      mode: "vertical", //vertical horizontal
+      activeIndex: "0",
+      path: "",
+      cacheViews: [], //缓存的路由
+      menuList: [
+        { title: "canvas", path: "/canvas/canvas1" },
+        {
+          title: "动画",
+          path: "/animation/test1",
+        },
+        {
+          title: "语言",
+          path: "/i18n",
+          children: [{ title: "i18n", path: "/language/i18n" }],
+        },
+        {
+          title: "样式",
+          path: "/inputcss",
+          children: [{ title: "inputcss", path: "/style/inputcss" }],
+        },
+      ],
+    };
   },
   created() {},
   methods: {
-    fn1() {
-      console.log(window.location)
-      if (window.location.href.indexOf('#reloaded') == !-1) {
-        window.location.href = window.location.href + '#reloaded'
-        window.location.reload()
-      }
-      // testapi().then((res) => {
-      //   console.log('接口结果', res)
-      // })
-      // let http = axios.create()
-      // http.post('https://mock.apifox.cn/m1/2940008-0-default/pet')
+    select(index, indexPath) {
+      console.log(index);
+      this.cacheViews.unshift(index);
+      this.$router.push(index);
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped></style>
