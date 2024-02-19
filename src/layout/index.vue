@@ -18,7 +18,7 @@ export default {
   name: "layout",
   data() {
     return {
-      mode: "horizontal", //vertical horizontal
+      mode: "vertical", //vertical horizontal
       activeIndex: "0",
       path: "",
       cacheViews: [], //缓存的路由

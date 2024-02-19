@@ -5,7 +5,17 @@
     :default-active="activeIndex"
     @select="select"
   >
-    <menu-tree :menuList="menuList"></menu-tree>
+    <template v-for="item in menuList">
+      <menu-tree
+        v-if="item.children && item.children.length > 0"
+        :index="item.path"
+        :key="item.path"
+        :menu="item"
+      ></menu-tree>
+      <el-menu-item v-else :index="item.path" :key="item.path">
+        {{ item.title }}
+      </el-menu-item>
+    </template>
   </el-menu>
 </template>
 <script>
