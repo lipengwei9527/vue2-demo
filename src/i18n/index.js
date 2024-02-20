@@ -3,9 +3,8 @@ import VueI18n from "vue-i18n"
 import ElementLocal from 'element-ui/lib/locale'
 import enLocale from 'element-ui/lib/locale/lang/en' //引入elementui语言包
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN' //引入ele语言包
-
 Vue.use(VueI18n)
-function loadLocalMessages () {
+function loadLocalMessages() {
   const locals = require.context('.', true, /.json$/i)
   const messages = {}
   locals.keys().forEach(key => {
@@ -17,15 +16,16 @@ function loadLocalMessages () {
 const localMessages = loadLocalMessages()
 
 const i18n = new VueI18n({
-  locale: localStorage.getItem('local') || 'en',//页面当前使用的语言的标识
+  locale: localStorage.getItem('local') || 'zh',//页面当前使用的语言的标识
   messages: {
     ...localMessages,
+    zh: {
+      ...zhLocale, ...localMessages.zh
+    },
     en: {
       ...enLocale, ...localMessages.en
     },
-    zh: {
-      ...zhLocale, ...localMessages.zh
-    }
+
   },
   // silentTranslationWarn: true
 })

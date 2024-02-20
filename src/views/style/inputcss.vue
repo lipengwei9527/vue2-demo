@@ -1,7 +1,25 @@
 <template>
   <div class="inputcss">
     <div class="coolinput">
-      <label for="input" class="text">sadfs  :</label>
+      <label for="input" class="text">sadfs :</label>
+      <input
+        type="text"
+        placeholder="Write here..."
+        name="input"
+        class="input"
+      />
+    </div>
+    <div class="coolinput">
+      <label for="input" class="text">sadfs :</label>
+      <input
+        type="text"
+        placeholder="Write here..."
+        name="input"
+        class="input"
+      />
+    </div>
+    <div class="coolinput">
+      <label for="input" class="text">sadfs :</label>
       <input
         type="text"
         placeholder="Write here..."

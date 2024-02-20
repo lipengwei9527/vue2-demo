@@ -7,7 +7,7 @@
  * @param {是否添加层级，level>=0，添加层级,顶层level数为输入的level，子级level数逐级加一} level 
  * @returns
  */
-export function dataTransTree (data, rootId = 0, level = -1, pidKey = 'pid', idKey = 'id') {
+export function dataTransTree(data, rootId = 0, pidKey = 'pid', idKey = 'id', level = -1) {
   let arr = []
   data.forEach(item => {
     if (item[pidKey] == rootId) {
@@ -29,7 +29,7 @@ export function dataTransTree (data, rootId = 0, level = -1, pidKey = 'pid', idK
  * @param {树结构数组} data 
  * @returns
  */
-export function treeTransData (data) {
+export function treeTransData(data) {
   let res = []
   data.forEach(item => {
     let { children, ...obj } = item

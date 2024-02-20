@@ -16,7 +16,6 @@ import '@/utils'
 
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
-// Vue.prototype.$i18n = i18n
 Vue.prototype.$bus = new Vue()
 
 Vue.use(elementUi)

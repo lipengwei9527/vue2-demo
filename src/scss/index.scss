@@ -4,8 +4,6 @@
 // 滚动条样式
 @import "./scrollbar.scss";
 
-/**********************全局布局样式****************************/
-
 * {
   padding: 0;
   margin: 0;
@@ -25,46 +23,30 @@ body {
   height: 100%;
 }
 
-// 整体布局
+/**********************页面整体布局样式****************************/
 .layout {
   height: 100%;
-  // display: flex;
-  // overflow: auto;
-  // background-color: #f0f2f5;
-
-  // 一级菜单
-  .g-h1 {
-    font-size: $h4_fontSize;
-    font-weight: 600;
-  }
-
-  /***********************************************************/
-
-  /*******************交易页面样式***************************/
-  .trade-page {
-    flex: 1;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 10px;
-    background-color: #fff;
+  background-color: #f4f4f5;
+  .layout-page {
+    height: calc(100% - 60.8px);
+    display: flex;
+    .left-menu {
+      min-width: 200px;
+      width: 15%;
+      overflow: auto;
+    }
+    .trade-page {
+      background-color: #fff;
+      flex: 1;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
   }
 }
+/***********************************************************/
 
-.page {
-  padding: 10px;
-}
-
-.page-content {
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-// 一级标题
-.p-h1 {
-  font-size: $h4_fontSize;
-  font-weight: 600;
-}
+/*******************交易页面公共样式***************************/
 
 /**********************************************/
 

@@ -5,7 +5,9 @@ import Vue from "vue";
 //   Vue.component(com.name, com)
 // })
 
-import Ctable from "@/components/CTable";
-Vue.component("c-table", Ctable);
-import CMenu from "@/components/CMenu/CMenu";
-Vue.component("c-menu", CMenu);
+import exTable from "@/components/exTable/exTable";
+Vue.component("ex-table", exTable);
+import exMenu from "@/components/exMenu/exMenu";
+Vue.component("ex-menu", exMenu);
+import exSearch from "@/components/exSearch/exSearch";
+Vue.component("ex-search", exSearch);

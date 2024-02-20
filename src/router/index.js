@@ -2,7 +2,8 @@ import Vue from "vue";
 import newRouter from "@/utils/router";
 
 // 路由
-import animation from "./animation";
+import animationRoute from "./animationRoute";
+import styleRoute from "./styleRoute";
 Vue.use(newRouter);
 const routes = [
   {
@@ -10,7 +11,8 @@ const routes = [
     component: () => import("@/layout/index.vue"),
     // redirect: 'canvas1',
     children: [
-      animation,
+      animationRoute,
+      ...styleRoute,
       {
         path: "/home",
         name: "首页",
@@ -27,12 +29,6 @@ const routes = [
         path: "/language/i18n",
         name: "i18n",
         component: () => import("@/views/i18n/i18n.vue"),
-        meta: {},
-      },
-      {
-        path: "/style/inputcss",
-        name: "inputcss",
-        component: () => import("@/views/style/inputcss.vue"),
         meta: {},
       },
     ],
