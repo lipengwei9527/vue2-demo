@@ -1,13 +1,18 @@
 <template>
-  <div class="canvas">初试canvas</div>
+  <div class="vue2-note"></div>
 </template>
 <script>
 export default {
-  name: "canvas1",
+  name: "vue2Note",
+  components: {},
+  mixins: [],
+  props: {},
   data() {
     return {};
   },
-  created() {},
+  computed: {},
+  watch: {},
+  mounted() {},
   methods: {},
 };
 </script>

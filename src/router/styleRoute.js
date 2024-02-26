@@ -1,7 +1,8 @@
 export default [
     {
-        path: "/style/searchForm",
-        name: "exForm",
-        component: () => import("@/views/style/searchForm/searchForm.vue")
+        path: "/style/grid_layout",
+        name: "gridLayout",
+        component: () => import("@/views/style/gridLayout/gridLayout.vue")
     },
+  
 ]

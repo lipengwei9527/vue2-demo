@@ -1,13 +1,15 @@
 <template>
-  <div class="canvas">初试canvas</div>
+  <div class="login"></div>
 </template>
 <script>
 export default {
-  name: "canvas1",
+  name: "login",
   data() {
     return {};
   },
-  created() {},
+  computed: {},
+  watch: {},
+  mounted() {},
   methods: {},
 };
 </script>

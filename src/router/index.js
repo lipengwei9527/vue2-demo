@@ -2,7 +2,8 @@ import Vue from "vue";
 import newRouter from "@/utils/router";
 
 // 路由
-import animationRoute from "./animationRoute";
+import comsRoute from "./comsRoute";
+import noteRoute from "./noteRoute";
 import styleRoute from "./styleRoute";
 Vue.use(newRouter);
 const routes = [
@@ -11,7 +12,8 @@ const routes = [
     component: () => import("@/layout/index.vue"),
     // redirect: 'canvas1',
     children: [
-      animationRoute,
+      ...noteRoute,
+      ...comsRoute,
       ...styleRoute,
       {
         path: "/home",
@@ -19,18 +21,18 @@ const routes = [
         component: () => import("@/views/home/home.vue"),
         meta: {},
       },
-      {
-        path: "/canvas/canvas1",
-        name: "canvas1",
-        component: () => import("@/views/canvas/canvas1.vue"),
-        meta: {},
-      },
-      {
-        path: "/language/i18n",
-        name: "i18n",
-        component: () => import("@/views/i18n/i18n.vue"),
-        meta: {},
-      },
+      // {
+      //   path: "/canvas/canvas1",
+      //   name: "canvas1",
+      //   component: () => import("@/views/canvas/canvas1.vue"),
+      //   meta: {},
+      // },
+      // {
+      //   path: "/language/i18n",
+      //   name: "i18n",
+      //   component: () => import("@/views/i18n/i18n.vue"),
+      //   meta: {},
+      // },
     ],
   },
 ];

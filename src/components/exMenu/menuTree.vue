@@ -35,8 +35,4 @@ export default {
   methods: {},
 };
 </script>
-<style lang="scss">
-// .menu-tree {
-//   width: 100%;
-// }
-</style>
+<style lang="scss"></style>

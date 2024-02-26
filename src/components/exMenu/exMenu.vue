@@ -21,7 +21,7 @@
 <script>
 import menuTree from "./menuTree.vue";
 export default {
-  name: "CMenu",
+  name: "exMenu",
   components: {
     menuTree,
   },

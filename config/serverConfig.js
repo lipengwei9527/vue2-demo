@@ -1,4 +1,5 @@
 const env = process.env.VUE_APP_ENV
+console.log('当前环境：', env,process.env.NODE_ENV)
 const root = {
   dev: {
     baseURL: "/api",
@@ -10,7 +11,7 @@ const root = {
         changeOrigin: true
       }
     },
-
+    productionSourceMap: true
   },
   prod: {
     baseURL: ''

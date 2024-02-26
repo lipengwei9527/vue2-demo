@@ -1,57 +1,165 @@
 <template>
   <div class="animation">
-    <el-button size="mini" type="primary" @click="changeStyle">动画</el-button>
-    <div class="basic" :class="{ style1: flag == 1 }"></div>
+    <el-button size="mini" type="primary" @click="execBtns"> 动画 </el-button>
+    <div ref="shell" class="shell">
+      <el-button
+        size="mini"
+        type="primary"
+        :class="{ 'jello-horizontal': flag }"
+        @click="execBtns(0)"
+      >
+        动画1
+      </el-button>
+      <el-button
+        size="mini"
+        type="primary"
+        :class="{ 'shake-horizontal': flag }"
+        @click="execBtns(1)"
+      >
+        动画2
+      </el-button>
+    </div>
   </div>
 </template>
 <script>
+import { debounce, throttle } from "@/utils/general.js";
 export default {
-  name: 'animation1',
+  name: "animation1",
   data() {
     return {
-      flag: 0,
-    }
+      btns: [false, false],
+      flag: false,
+    };
   },
   created() {},
   methods: {
-    changeStyle() {
-      this.flag++
-      if (this.flag == 10) this.flag = 0
+    execBtns() {
+      this.flag = !this.flag;
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
-.basic {
-  width: 200px;
-  height: 200px;
-  background: red;
+.jello-horizontal {
+  animation: jello-horizontal 1s;
 }
-.style1 {
-  // animation-name：设置需要绑定到元素的动画名称；
-  // animation-duration：设置完成动画所需要花费的时间，单位为秒或毫秒，默认为 0；
-  // animation-timing-function：设置动画的速度曲线，默认为 ease；
-  // animation-fill-mode：设置当动画不播放时（动画播放完或延迟播放时）的状态；
-  // animation-delay：设置动画开始之前的延迟时间，默认为 0；
-  // animation-iteration-count：设置动画被播放的次数，默认为 1；
-  // animation-direction：设置是否在下一周期逆向播放动画，默认为 normal；
-  // animation-play-state：设置动画是正在运行还是暂停，默认是 running；
-  // animation：所有动画属性的简写属性。
-  animation-name: an1;
-  animation: 2s ease 0 infinite normal;
+.shake-horizontal {
+  animation: shake-horizontal 1s;
 }
-@keyframes an1 {
+@-webkit-keyframes jello-horizontal {
   0% {
-    width: 200px;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
-  25% {
-    width: 300px;
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
   }
   50% {
-    width: 400px;
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
   }
   100% {
-    width: 500px;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@-webkit-keyframes shake-horizontal {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateX(-10px);
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+  80% {
+    -webkit-transform: translateX(8px);
+    transform: translateX(8px);
+  }
+  90% {
+    -webkit-transform: translateX(-8px);
+    transform: translateX(-8px);
+  }
+}
+@keyframes shake-horizontal {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateX(-5px);
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateX(5px);
+    transform: translateX(5px);
+  }
+  80% {
+    -webkit-transform: translateX(3px);
+    transform: translateX(3px);
+  }
+  90% {
+    -webkit-transform: translateX(-3px);
+    transform: translateX(-3px);
   }
 }
 </style>

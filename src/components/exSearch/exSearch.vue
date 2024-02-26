@@ -9,8 +9,10 @@
       :ref="item.comKey"
       @change="changeFn"
     ></component>
-    <el-button size="mini" @click="resetFn">重置</el-button>
-    <el-button size="mini" type="primary" @click="searchFn">搜索</el-button>
+    <div class="operation">
+      <el-button size="mini" @click="resetFn">重置</el-button>
+      <el-button size="mini" type="primary" @click="searchFn">搜索</el-button>
+    </div>
   </div>
 </template>
 <script>
@@ -22,7 +24,6 @@ export default {
   components: { exInput, exSelect, exDate },
   mixins: [],
   props: {
-    // 传入的原始数据
     comData: {
       type: Array,
       default: () => [],
@@ -30,8 +31,8 @@ export default {
   },
   data() {
     return {
-      handleData: [], // 操作的数据
-      searchData: {}, // 搜索要返回的数据
+      handleData: [],
+      searchData: {},
     };
   },
   created() {
@@ -39,7 +40,6 @@ export default {
   },
   methods: {
     changeFn(comKey, value) {
-      console.log("exSearchChange", comKey, value);
       this.$set(this.searchData, comKey, value);
     },
     // 恢复为原始数据
@@ -53,7 +53,7 @@ export default {
       });
     },
     searchFn() {
-      console.log(this.searchData);
+      this.$emit("searchFn", JSON.parse(JSON.stringify(this.searchData)));
     },
   },
 };
@@ -61,8 +61,9 @@ export default {
 <style lang="scss" scoped>
 .ex-search {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   flex-wrap: wrap;
+  grid-gap: 5px;
 }
 </style>

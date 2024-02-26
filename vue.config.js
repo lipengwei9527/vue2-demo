@@ -41,8 +41,11 @@ module.exports = defineConfig({
     // 相对路径别名
     config.resolve.alias
       .set("@", resolve("src"))
+      .set("@axios", resolve("src/axios"))
+      .set("@mixin", resolve("src/mixin"))
+      .set("@utils", resolve("src/utils"))
       .set("@config", resolve("config"));
   },
   // 打包输出map文件
-  productionSourceMap: true,
+  productionSourceMap: serverConfig.productionSourceMap,
 });

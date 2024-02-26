@@ -11,7 +11,7 @@ import appVersion from '@config/version.json'
  * @param {被分割的数组} targetList 
  * @returns {Array}
  */
-export function splitList (nodeList, targetList) {
+export function splitList(nodeList, targetList) {
   let list = []
   let start = 0
   let end = 0
@@ -61,7 +61,7 @@ export function splitList (nodeList, targetList) {
  *  },1000,false)
  * }
  */
-export function debounce (callback, delay = 2000, immediate = true) {
+export function debounce(callback, delay = 2000, immediate = true) {
   if (immediate) {
     return debounceIsImmediate(callback, delay)
   } else {
@@ -69,7 +69,7 @@ export function debounce (callback, delay = 2000, immediate = true) {
   }
 }
 // 防抖立即执行,建议使用debounce函数
-export function debounceIsImmediate (callback, delay = 2000) {
+export function debounceIsImmediate(callback, delay = 2000) {
   let timer = null
   let flag = true
   return function () {
@@ -88,7 +88,7 @@ export function debounceIsImmediate (callback, delay = 2000) {
 }
 
 // 防抖延迟执行,建议使用debounce函数
-export function debounceNotImmediate (callback, delay = 2000) {
+export function debounceNotImmediate(callback, delay = 2000) {
   let timer = null;
   return function () {
     if (timer) {
@@ -116,7 +116,7 @@ export function debounceNotImmediate (callback, delay = 2000) {
     }, 1000),
   },
  */
-export function throttle (callback, interval = 2000, immediate = true) {
+export function throttle(callback, interval = 2000, immediate = true) {
   if (immediate) {
     return throttleIsImmediate(callback, interval)
   } else {
@@ -125,7 +125,7 @@ export function throttle (callback, interval = 2000, immediate = true) {
 }
 
 // 节流立即执行,建议使用throttle函数
-export function throttleIsImmediate (callback, interval = 2000) {
+export function throttleIsImmediate(callback, interval = 2000) {
   let last = 0
   return function () {
     let now = Date.now()
@@ -138,7 +138,7 @@ export function throttleIsImmediate (callback, interval = 2000) {
 
 
 // 节流延迟执行,建议使用throttle函数
-export function throttleNotImmediate (callback, interval = 2000) {
+export function throttleNotImmediate(callback, interval = 2000) {
   let flag = true
   return function () {
     if (flag) {
@@ -157,7 +157,7 @@ export function throttleNotImmediate (callback, interval = 2000) {
  * @param {组件绑定的ref名字} refName 
  * @param {距离窗口底部的高度} height 
  */
-export function resetTableHeight (_this, refName, height = 0) {
+export function resetTableHeight(_this, refName, height = 0) {
   setTimeout(() => {
     let table = _this.$refs[refName]
     if (table) {
@@ -173,7 +173,7 @@ export function resetTableHeight (_this, refName, height = 0) {
  * @param {不够指定长度时填充的字符串默认填充0} sign 
  * @returns {String} 指定长度的字符串
  */
-export function getAssignChar (str, length, sign = '0') {
+export function getAssignChar(str, length, sign = '0') {
   if (str.length < length) {
     return str + new Array(length - str.length).join(sign)
   } else if (str.length > length) {
@@ -187,7 +187,7 @@ export function getAssignChar (str, length, sign = '0') {
  * @param {要拷贝的数据} data 
  * @returns 拷贝的结果 
  */
-export function deepClone (data) {
+export function deepClone(data) {
   let result
   if (data == null || typeof data != 'object') {
     return data
@@ -204,7 +204,7 @@ export function deepClone (data) {
   return result
 }
 // 刷新界面
-export function refreshApp () {
+export function refreshApp() {
   let version = localStorage.getItem('version')
   if (!version || appVersion.version != version) {
     localStorage.clear()
@@ -214,7 +214,7 @@ export function refreshApp () {
 }
 
 
-export function show () {
+export function show() {
   Message.error('报错')
 }
 

@@ -2,10 +2,10 @@
   <div class="layout">
     <!-- 顶部菜单 -->
     <ex-menu
-      :mode="mode"
+      mode="horizontal"
       :menuList="topMenuList"
-      :activeIndex="activeIndex"
-      @select="topSelect"
+      :activeIndex="topActive"
+      @select="selectTopMenu"
     ></ex-menu>
     <div class="layout-page">
       <!-- 左面菜单 -->
@@ -13,8 +13,8 @@
         class="left-menu"
         mode="vertical"
         :menuList="leftMenuList"
-        :activeIndex="activeIndex"
-        @select="leftSelect"
+        :activeIndex="leftActive"
+        @select="selectLeftMenu"
       ></ex-menu>
       <!-- 交易页面 -->
       <div class="trade-page">
@@ -26,63 +26,46 @@
   </div>
 </template>
 <script>
+import menu from "./menu";
+import { dataTransTree } from "@/utils/tree";
 export default {
   name: "layout",
   data() {
     return {
-      mode: "horizontal", //vertical horizontal
-      activeIndex: "0",
+      topActive: "",
+      leftActive: "",
       path: "",
       cacheViews: [], //缓存的路由
-      topMenuList: [
-        { title: "canvas", path: "/canvas/canvas1" },
-        {
-          title: "动画",
-          path: "/animation/test1",
-        },
-        {
-          title: "语言",
-          path: "/i18n",
-        },
-        {
-          title: "样式",
-          path: "/style",
-        },
-      ],
+      topMenuList: [],
       leftMenuList: [],
-      // 自己菜单
-      childData: {
-        "/style": [
-          {
-            title: "搜索表单",
-            path: "/style/searchForm",
-          },
-        ],
-      },
+      allMenus: [],
     };
   },
-  created() {},
+  created() {
+    this.allMenus = dataTransTree(menu);
+    this.topMenuList = this.allMenus.map((item) => {
+      return {
+        id: item.id,
+        pid: item.pid,
+        title: item.title,
+        path: item.path,
+      };
+    });
+    this.topActive = this.topMenuList[0].path;
+    let leftMenu = this.allMenus[0].children;
+    this.leftMenuList = leftMenu;
+    this.leftActive = leftMenu[0].path;
+    this.$router.push(this.leftActive);
+  },
   methods: {
-    createMenuData() {
-      for (let i = 1; i < 30; i++) {
-        this.leftMenuList.push({
-          title: "菜单" + i,
-          path: i.toString(),
-        });
-      }
-    },
-    // 顶部菜单事件
-    topSelect(index, indexPath) {
+    selectTopMenu(index, indexPath) {
       console.log(index, indexPath);
-      if (!this.childData[index]) {
-        this.$router.push(index);
-        this.leftMenuList = [];
-      } else {
-        this.leftMenuList = this.childData[index];
-      }
+      this.leftMenuList = this.allMenus.find(
+        (item) => item.path == index
+      ).children;
     },
-    // 左面菜单事件
-    leftSelect(index, indexPath) {
+    selectLeftMenu(index, indexPath) {
+      this.leftActive = index;
       this.$router.push(index);
     },
   },
