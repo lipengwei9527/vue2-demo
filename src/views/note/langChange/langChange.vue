@@ -1,9 +1,12 @@
 <template>
   <div>
-    <el-button @click="changeLanguage">切换语言</el-button>
-    <div>json文件：</div>
-    <div>{{ ta }}</div>
+    <el-button size="small" type="primary" @click="changeLanguage">
+      切换语言
+    </el-button>
+    <br />
+    <div>本地语言：</div>
     <div>{{ $t("language") }}</div>
+    <br />
     <div>element语言包：</div>
     <div>{{ $t("el.cascader.loading") }}</div>
     <el-date-picker></el-date-picker>
@@ -17,28 +20,16 @@ export default {
       count: 1,
     };
   },
-  computed: {
-    ta() {
-      return this.$t("language");
-    },
-  },
-  created() {
-    console.log(this);
-    console.log(this.$t);
-  },
   methods: {
     changeLanguage() {
-      let flags = ["en", "zh"];
-      this.count = this.count + 1;
-      if (this.count > 1) {
-        this.count = 0;
-        localStorage.setItem("local", "en");
-        sessionStorage.setItem("local", "en");
-      } else {
+      let local = localStorage.getItem("local");
+      if (local == "en") {
         localStorage.setItem("local", "zh");
-        sessionStorage.setItem("local", "zh");
+        this.$i18n.locale = "zh";
+      } else {
+        localStorage.setItem("local", "en");
+        this.$i18n.locale = "en";
       }
-      this.$i18n.locale = flags[this.count];
     },
   },
 };

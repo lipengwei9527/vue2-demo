@@ -1,22 +1,25 @@
 <template>
-  <div class="ex-date">
-    <el-date-picker
+  <div class="ex-select">
+    <el-select
       v-model="value"
-      v-bind="{
-        'start-placeholder': '开始',
-        'end-placeholder': '结束',
-        'value-format': 'yy-MM-dd',
-        type: 'daterange',
-        ...config,
-      }"
+      v-bind="{ placeholder: '请选择', size: 'small', ...config }"
       @change="changeFn"
     >
-    </el-date-picker>
+      <el-option
+        v-for="item in config.options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      >
+      </el-option>
+    </el-select>
   </div>
 </template>
 <script>
 export default {
-  name: "exDate",
+  name: "exSelect",
+  components: {},
+  mixins: [],
   props: {
     searchData: {
       type: Object,
@@ -30,6 +33,7 @@ export default {
   data() {
     return {
       value: "",
+      options: [],
     };
   },
   created() {
@@ -37,7 +41,6 @@ export default {
   },
   methods: {
     changeFn(value) {
-      console.log("exDate", value);
       this.$emit("change", this.config.comKey, value);
     },
   },

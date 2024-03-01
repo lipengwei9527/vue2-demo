@@ -1,13 +1,14 @@
 import Vue from "vue";
-// let req = require.context('@/components', true, /\.vue$/)
-// req.keys().forEach(fileName => {
-//   const com = req(fileName).default
-//   Vue.component(com.name, com)
-// })
+let req = require.context('@/components', true, /\.vue$/)
+req.keys().forEach(fileName => {
+    let length = fileName.split('/').length
+    // 只注册文件夹下第一层级的vue文件，更子级文件夹中的vue文件不注册
+    if (length == 3) {
+        const com = req(fileName).default
+        Vue.component(com.name, com)
+    }
+})
 
-import exTable from "@/components/exTable/exTable";
-Vue.component("ex-table", exTable);
-import exMenu from "@/components/exMenu/exMenu";
-Vue.component("ex-menu", exMenu);
-import exSearch from "@/components/exSearch/exSearch";
-Vue.component("ex-search", exSearch);
+// 开源组件
+import draggable from "vuedraggable";
+Vue.component("draggable", draggable);

@@ -19,7 +19,7 @@
   </el-menu>
 </template>
 <script>
-import menuTree from "./menuTree.vue";
+import menuTree from "./components/menuTree.vue";
 export default {
   name: "exMenu",
   components: {
@@ -36,7 +36,7 @@ export default {
     },
     activeIndex: {
       type: String,
-      default: "0",
+      default: "",
     },
     menuList: {
       type: Array,

@@ -1,5 +1,5 @@
 export default {
-  path: "/canvas/test1",
-  name: "animation",
+  path: "/canvas/canvas1",
+  name: "canvas1",
   component: () => import("@/views/canvas/canvas1.vue")
 }

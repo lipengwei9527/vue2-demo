@@ -18,7 +18,7 @@
       ></ex-menu>
       <!-- 交易页面 -->
       <div class="trade-page">
-        <keep-alive :max="10" :include="cacheViews">
+        <keep-alive :max="10">
           <router-view :to="path"></router-view>
         </keep-alive>
       </div>
@@ -32,13 +32,13 @@ export default {
   name: "layout",
   data() {
     return {
+      allMenus: [],
       topActive: "",
       leftActive: "",
       path: "",
       cacheViews: [], //缓存的路由
       topMenuList: [],
       leftMenuList: [],
-      allMenus: [],
     };
   },
   created() {
@@ -59,7 +59,6 @@ export default {
   },
   methods: {
     selectTopMenu(index, indexPath) {
-      console.log(index, indexPath);
       this.leftMenuList = this.allMenus.find(
         (item) => item.path == index
       ).children;

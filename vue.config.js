@@ -8,7 +8,8 @@ module.exports = defineConfig({
   // 指定index.html打包后的路径及文件名
   indexPath: "./html/index.html",
   devServer: {
-    host: "127.0.0.1",
+    // host: "127.0.0.1",
+    host: "localhost",
     port: "8080",
     open: false,
     proxy: {

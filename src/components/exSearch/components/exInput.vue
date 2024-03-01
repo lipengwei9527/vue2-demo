@@ -2,7 +2,10 @@
   <div class="ex-input">
     <el-input
       v-model="value"
-      v-bind="{ ...config }"
+      v-bind="{
+        size: 'small',
+        ...config,
+      }"
       @change="changeFn"
     ></el-input>
   </div>

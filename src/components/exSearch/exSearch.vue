@@ -16,9 +16,9 @@
   </div>
 </template>
 <script>
-import exInput from "./exInput.vue";
-import exSelect from "./exSelect.vue";
-import exDate from "./exDate.vue";
+import exInput from "./components/exInput.vue";
+import exSelect from "./components/exSelect.vue";
+import exDate from "./components/exDate.vue";
 export default {
   name: "exSearch",
   components: { exInput, exSelect, exDate },
@@ -45,11 +45,13 @@ export default {
     // 恢复为原始数据
     resetFn() {
       this.handleData = JSON.parse(JSON.stringify(this.comData));
-      this.handleData.forEach((item) => {
-        this.searchData[item.comKey] = item.value;
-        if (this.$refs && this.$refs[item.comKey]) {
-          this.$refs[item.comKey][0].value = item.value;
-        }
+      this.$nextTick(() => {
+        this.handleData.forEach((item) => {
+          this.searchData[item.comKey] = item.value;
+          if (this.$refs && this.$refs[item.comKey]) {
+            this.$refs[item.comKey][0].value = item.value;
+          }
+        });
       });
     },
     searchFn() {

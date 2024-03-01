@@ -1,14 +1,16 @@
 <template>
-  <div class="vue2-note"></div>
+  <div>
+    <el-checkbox v-model="checked">备选项</el-checkbox>
+  </div>
 </template>
 <script>
 export default {
-  name: "vue2Note",
+  name: "second",
   components: {},
   mixins: [],
   props: {},
   data() {
-    return {};
+    return { checked: false };
   },
   computed: {},
   watch: {},

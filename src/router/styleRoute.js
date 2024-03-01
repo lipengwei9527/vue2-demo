@@ -1,6 +1,6 @@
 export default [
     {
-        path: "/style/grid_layout",
+        path: "/style/gridLayout",
         name: "gridLayout",
         component: () => import("@/views/style/gridLayout/gridLayout.vue")
     },

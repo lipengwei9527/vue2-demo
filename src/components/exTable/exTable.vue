@@ -1,280 +1,283 @@
 <template>
-  <div class="cus-table">
-    <el-table
-      ref="table"
-      :data="tableData"
-      :height="height"
-      :max-height="maxHeight"
-      :stripe="stripe"
-      :border="border"
-      :size="size"
-      :fit="fit"
-      :show-header="showHeader"
-      :highlight-current-row="highlightCurrentRow"
-      :current-row-key="currentRowKey"
-      :row-class-name="rowClassName"
-      :row-style="rowStyle"
-      :cell-class-name="cellClassName"
-      :cell-style="cellStyle"
-      :header-row-class-name="headerRowClassName"
-      :header-row-style="headerRowStyle"
-      :header-cell-class-name="headerCellClassName"
-      :header-cell-style="headerCellStyle"
-      :row-key="rowKey"
-      :empty-text="emptyText"
-      :default-expand-all="defaultExpandAll"
-      :expand-row-keys="expandRowKeys"
-      :default-sort="defaultSort"
-      :tooltip-effect="tooltipEffect"
-      :show-summary="showSummary"
-      :sum-text="sumText"
-      :summary-method="summaryMethod"
-      :span-method="spanMethod"
-      :select-on-indeterminate="selectOnIndeterminate"
-      :indent="indent"
-      :lazy="lazy"
-      :load="load"
-      :tree-props="treeProps"
-      @select="select"
-      @select-all="selectAll"
-      @selection-change="selectionChange"
-      @cell-mouse-enter="cellMouseEnter"
-      @cell-mouse-leave="cellMouseLeave"
-      @cell-click="cellClick"
-      @cell-dblclick="cellDblclick"
-      @row-click="rowClick"
-      @row-contextmenu="rowContextmenu"
-      @row-dblclick="rowCblclick"
-      @header-click="headerClick"
-      @header-contextmenu="headerContextmenu"
-      @sort-change="sortChange"
-      @filter-change="filterChange"
-      @current-change="currentTableChange"
-      @header-dragend="headerDragend"
-      @expand-change="expandChange"
-    >
-      <!-- 复选列 -->
-      <el-table-column
-        v-if="selection"
-        width="50"
-        label="fuxuan"
-        type="selection"
-        :align="align"
-        :selectable="selectable"
-        :reserve-selection="reserveSelection"
+  <div class="ex-table" ref="cusTable">
+    <div class="table-shell" ref="tableShell">
+      <el-table
+        ref="table"
+        :data="tableData"
+        :height="height"
+        :max-height="maxHeight"
+        :stripe="stripe"
+        :border="border"
+        :size="size"
+        :fit="fit"
+        :show-header="showHeader"
+        :highlight-current-row="highlightCurrentRow"
+        :current-row-key="currentRowKey"
+        :row-class-name="rowClassName"
+        :row-style="rowStyle"
+        :cell-class-name="cellClassName"
+        :cell-style="cellStyle"
+        :header-row-class-name="headerRowClassName"
+        :header-row-style="headerRowStyle"
+        :header-cell-class-name="headerCellClassName"
+        :header-cell-style="headerCellStyle"
+        :row-key="rowKey"
+        :empty-text="emptyText"
+        :default-expand-all="defaultExpandAll"
+        :expand-row-keys="expandRowKeys"
+        :default-sort="defaultSort"
+        :tooltip-effect="tooltipEffect"
+        :show-summary="showSummary"
+        :sum-text="sumText"
+        :summary-method="summaryMethod"
+        :span-method="spanMethod"
+        :select-on-indeterminate="selectOnIndeterminate"
+        :indent="indent"
+        :lazy="lazy"
+        :load="load"
+        :tree-props="treeProps"
+        @select="select"
+        @select-all="selectAll"
+        @selection-change="selectionChange"
+        @cell-mouse-enter="cellMouseEnter"
+        @cell-mouse-leave="cellMouseLeave"
+        @cell-click="cellClick"
+        @cell-dblclick="cellDblclick"
+        @row-click="rowClick"
+        @row-contextmenu="rowContextmenu"
+        @row-dblclick="rowCblclick"
+        @header-click="headerClick"
+        @header-contextmenu="headerContextmenu"
+        @sort-change="sortChange"
+        @filter-change="filterChange"
+        @current-change="currentTableChange"
+        @header-dragend="headerDragend"
+        @expand-change="expandChange"
       >
-      </el-table-column>
-      <!-- 序号列 -->
-      <el-table-column
-        v-if="showIndex"
-        label="序号"
-        type="index"
-        width="50"
-        fixed="left"
-        :align="align"
-        :index="indexMethod"
-      ></el-table-column>
-
-      <!-- 表格列 -->
-      <template v-for="(item, index) in columns">
+        <!-- 复选列 -->
         <el-table-column
-          :key="`${item.prop}_${item.label}_${index}`"
-          :label="item.label"
-          :prop="item.prop"
-          :column-key="item.columnKey"
-          :width="item.width"
-          :min-width="item.minWidth"
-          :fixed="item.fixed"
-          :render-header="item.renderHeader"
-          :sortable="item.sortable"
-          :sort-method="item.sortMethod"
-          :sort-by="item.sortBy"
-          :sort-orders="item.sortOrders"
-          :resizable="item.resizable"
-          :formatter="item.formatter"
-          :show-overflow-tooltip="
-            item.showOverflowTooltip
-              ? item.showOverflowTooltip
-              : showOverflowTooltip
-          "
-          :align="item.align ? item.align : align"
-          :header-align="
-            item.headerAlign
-              ? item.headerAlign
-              : item.align
-              ? item.align
-              : align
-          "
-          :class-name="item.className"
-          :label-class-name="item.labelClassName"
-          :filters="item.filters"
-          :filter-placement="item.filterPlacement"
-          :filter-multiple="item.filterMultiple"
-          :filter-method="item.filterMethod"
-          :filtered-value="item.filteredValue"
+          v-if="selection"
+          width="50"
+          label="复选"
+          type="selection"
+          :align="align"
+          :selectable="selectable"
+          :reserve-selection="reserveSelection"
         >
-          <template slot="header" slot-scope="scope">
-            <slot
-              v-if="headSlots.indexOf('head-' + item.prop) != -1"
-              :name="'head-' + item.prop"
-              v-bind="scope"
-            ></slot>
-            <div v-else>{{ scope.column.label }}</div>
-          </template>
-
-          <template slot-scope="scope">
-            <slot
-              v-if="colSlots.indexOf(item.prop) != -1"
-              :name="item.prop"
-              v-bind="scope"
-            ></slot>
-            <div v-else>
-              {{
-                scope.row[item.prop]
-                  ? item.timeFormat
-                    ? $formatDate(scope.row[item.prop], item.timeFormat)
-                    : scope.row[item.prop]
-                  : defaultCellText
-              }}
-            </div>
-          </template>
-          <template v-for="(item2, index2) in item.children">
-            <el-table-column
-              :key="`${item2.prop}_${item2.label}_${index2}`"
-              :label="item2.label"
-              :prop="item2.prop"
-              :column-key="item2.columnKey"
-              :width="item2.width"
-              :min-width="item2.minWidth"
-              :fixed="item2.fixed"
-              :render-header="item2.renderHeader"
-              :sortable="item2.sortable"
-              :sort-method="item2.sortMethod"
-              :sort-by="item2.sortBy"
-              :sort-orders="item2.sortOrders"
-              :resizable="item2.resizable"
-              :formatter="item2.formatter"
-              :show-overflow-tooltip="
-                item2.showOverflowTooltip
-                  ? item2.showOverflowTooltip
-                  : showOverflowTooltip
-              "
-              :align="item2.align ? item2.align : align"
-              :header-align="
-                item2.headerAlign
-                  ? item2.headerAlign
-                  : item2.align
-                  ? item2.align
-                  : align
-              "
-              :class-name="item2.className"
-              :label-class-name="item2.labelClassName"
-              :filters="item2.filters"
-              :filter-placement="item2.filterPlacement"
-              :filter-multiple="item2.filterMultiple"
-              :filter-method="item2.filterMethod"
-              :filtered-value="item2.filteredValue"
-            >
-              <template slot="header" slot-scope="scope">
-                <slot
-                  v-if="headSlots.indexOf('head-' + item2.prop) != -1"
-                  :name="'head-' + item2.prop"
-                  v-bind="scope"
-                ></slot>
-                <div v-else>{{ scope.column.label }}</div>
-              </template>
-
-              <template slot-scope="scope">
-                <slot
-                  v-if="colSlots.indexOf(item2.prop) != -1"
-                  :name="item2.prop"
-                  v-bind="scope"
-                ></slot>
-                <div v-else>
-                  {{
-                    scope.row[item2.prop]
-                      ? item2.timeFormat
-                        ? $formatDate(scope.row[item2.prop], item2.timeFormat)
-                        : scope.row[item2.prop]
-                      : defaultCellText
-                  }}
-                </div>
-              </template>
-              <template v-for="(item3, index3) in item2.children">
-                <el-table-column
-                  :key="`${item3.prop}_${item3.label}_${index3}`"
-                  :label="item3.label"
-                  :prop="item3.prop"
-                  :column-key="item3.columnKey"
-                  :width="item3.width"
-                  :min-width="item3.minWidth"
-                  :fixed="item3.fixed"
-                  :render-header="item3.renderHeader"
-                  :sortable="item3.sortable"
-                  :sort-method="item3.sortMethod"
-                  :sort-by="item3.sortBy"
-                  :sort-orders="item3.sortOrders"
-                  :resizable="item3.resizable"
-                  :formatter="item3.formatter"
-                  :show-overflow-tooltip="
-                    item3.showOverflowTooltip
-                      ? item3.showOverflowTooltip
-                      : showOverflowTooltip
-                  "
-                  :align="item3.align ? item3.align : align"
-                  :header-align="
-                    item3.headerAlign
-                      ? item3.headerAlign
-                      : item3.align
-                      ? item3.align
-                      : align
-                  "
-                  :class-name="item3.className"
-                  :label-class-name="item3.labelClassName"
-                  :filters="item3.filters"
-                  :filter-placement="item3.filterPlacement"
-                  :filter-multiple="item3.filterMultiple"
-                  :filter-method="item3.filterMethod"
-                  :filtered-value="item3.filteredValue"
-                >
-                  <template slot="header" slot-scope="scope">
-                    <slot
-                      v-if="headSlots.indexOf('head-' + item3.prop) != -1"
-                      :name="'head-' + item3.prop"
-                      v-bind="scope"
-                    ></slot>
-                    <div v-else>{{ scope.column.label }}</div>
-                  </template>
-
-                  <template slot-scope="scope">
-                    <slot
-                      v-if="colSlots.indexOf(item3.prop) != -1"
-                      :name="item3.prop"
-                      v-bind="scope"
-                    ></slot>
-                    <div v-else>
-                      {{
-                        scope.row[item3.prop]
-                          ? item3.timeFormat
-                            ? $formatDate(
-                                scope.row[item3.prop],
-                                item3.timeFormat
-                              )
-                            : scope.row[item3.prop]
-                          : defaultCellText
-                      }}
-                    </div>
-                  </template>
-                </el-table-column>
-              </template>
-            </el-table-column>
-          </template>
         </el-table-column>
-      </template>
-    </el-table>
+        <!-- 序号列 -->
+        <el-table-column
+          v-if="showIndex"
+          label="序号"
+          type="index"
+          width="60"
+          fixed="left"
+          :align="align"
+          :index="indexMethod"
+        ></el-table-column>
 
-    <div class="cus-pageination" v-if="pageSize == 'none'">
+        <!-- 表格列 -->
+        <template v-for="(item, index) in columns">
+          <el-table-column
+            :key="`${item.prop}_${item.label}_${index}`"
+            :label="item.label"
+            :prop="item.prop"
+            :column-key="item.columnKey"
+            :width="item.width"
+            :min-width="item.minWidth"
+            :fixed="item.fixed"
+            :render-header="item.renderHeader"
+            :sortable="item.sortable"
+            :sort-method="item.sortMethod"
+            :sort-by="item.sortBy"
+            :sort-orders="item.sortOrders"
+            :resizable="item.resizable"
+            :formatter="item.formatter"
+            :show-overflow-tooltip="
+              item.showOverflowTooltip
+                ? item.showOverflowTooltip
+                : showOverflowTooltip
+            "
+            :align="item.align ? item.align : align"
+            :header-align="
+              item.headerAlign
+                ? item.headerAlign
+                : item.align
+                ? item.align
+                : align
+            "
+            :class-name="item.className"
+            :label-class-name="item.labelClassName"
+            :filters="item.filters"
+            :filter-placement="item.filterPlacement"
+            :filter-multiple="item.filterMultiple"
+            :filter-method="item.filterMethod"
+            :filtered-value="item.filteredValue"
+          >
+            <template slot="header" slot-scope="scope">
+              <slot
+                v-if="headSlots.indexOf('head-' + item.prop) != -1"
+                :name="'head-' + item.prop"
+                v-bind="scope"
+              ></slot>
+              <div v-else>{{ scope.column.label }}</div>
+            </template>
+
+            <template slot-scope="scope">
+              <slot
+                v-if="colSlots.indexOf(item.prop) != -1"
+                :name="item.prop"
+                v-bind="scope"
+              ></slot>
+              <div v-else>
+                {{
+                  scope.row[item.prop].toString()
+                    ? item.timeFormat
+                      ? $formatDate(scope.row[item.prop], item.timeFormat)
+                      : scope.row[item.prop]
+                    : defaultCellText
+                }}
+              </div>
+            </template>
+            <template v-for="(item2, index2) in item.children">
+              <el-table-column
+                :key="`${item2.prop}_${item2.label}_${index2}`"
+                :label="item2.label"
+                :prop="item2.prop"
+                :column-key="item2.columnKey"
+                :width="item2.width"
+                :min-width="item2.minWidth"
+                :fixed="item2.fixed"
+                :render-header="item2.renderHeader"
+                :sortable="item2.sortable"
+                :sort-method="item2.sortMethod"
+                :sort-by="item2.sortBy"
+                :sort-orders="item2.sortOrders"
+                :resizable="item2.resizable"
+                :formatter="item2.formatter"
+                :show-overflow-tooltip="
+                  item2.showOverflowTooltip
+                    ? item2.showOverflowTooltip
+                    : showOverflowTooltip
+                "
+                :align="item2.align ? item2.align : align"
+                :header-align="
+                  item2.headerAlign
+                    ? item2.headerAlign
+                    : item2.align
+                    ? item2.align
+                    : align
+                "
+                :class-name="item2.className"
+                :label-class-name="item2.labelClassName"
+                :filters="item2.filters"
+                :filter-placement="item2.filterPlacement"
+                :filter-multiple="item2.filterMultiple"
+                :filter-method="item2.filterMethod"
+                :filtered-value="item2.filteredValue"
+              >
+                <template slot="header" slot-scope="scope">
+                  <slot
+                    v-if="headSlots.indexOf('head-' + item2.prop) != -1"
+                    :name="'head-' + item2.prop"
+                    v-bind="scope"
+                  ></slot>
+                  <div v-else>{{ scope.column.label }}</div>
+                </template>
+
+                <template slot-scope="scope">
+                  <slot
+                    v-if="colSlots.indexOf(item2.prop) != -1"
+                    :name="item2.prop"
+                    v-bind="scope"
+                  ></slot>
+                  <div v-else>
+                    {{
+                      scope.row[item2.prop]
+                        ? item2.timeFormat
+                          ? $formatDate(scope.row[item2.prop], item2.timeFormat)
+                          : scope.row[item2.prop]
+                        : defaultCellText
+                    }}
+                  </div>
+                </template>
+                <template v-for="(item3, index3) in item2.children">
+                  <el-table-column
+                    :key="`${item3.prop}_${item3.label}_${index3}`"
+                    :label="item3.label"
+                    :prop="item3.prop"
+                    :column-key="item3.columnKey"
+                    :width="item3.width"
+                    :min-width="item3.minWidth"
+                    :fixed="item3.fixed"
+                    :render-header="item3.renderHeader"
+                    :sortable="item3.sortable"
+                    :sort-method="item3.sortMethod"
+                    :sort-by="item3.sortBy"
+                    :sort-orders="item3.sortOrders"
+                    :resizable="item3.resizable"
+                    :formatter="item3.formatter"
+                    :show-overflow-tooltip="
+                      item3.showOverflowTooltip
+                        ? item3.showOverflowTooltip
+                        : showOverflowTooltip
+                    "
+                    :align="item3.align ? item3.align : align"
+                    :header-align="
+                      item3.headerAlign
+                        ? item3.headerAlign
+                        : item3.align
+                        ? item3.align
+                        : align
+                    "
+                    :class-name="item3.className"
+                    :label-class-name="item3.labelClassName"
+                    :filters="item3.filters"
+                    :filter-placement="item3.filterPlacement"
+                    :filter-multiple="item3.filterMultiple"
+                    :filter-method="item3.filterMethod"
+                    :filtered-value="item3.filteredValue"
+                  >
+                    <template slot="header" slot-scope="scope">
+                      <slot
+                        v-if="headSlots.indexOf('head-' + item3.prop) != -1"
+                        :name="'head-' + item3.prop"
+                        v-bind="scope"
+                      ></slot>
+                      <div v-else>{{ scope.column.label }}</div>
+                    </template>
+
+                    <template slot-scope="scope">
+                      <slot
+                        v-if="colSlots.indexOf(item3.prop) != -1"
+                        :name="item3.prop"
+                        v-bind="scope"
+                      ></slot>
+                      <div v-else>
+                        {{
+                          scope.row[item3.prop]
+                            ? item3.timeFormat
+                              ? $formatDate(
+                                  scope.row[item3.prop],
+                                  item3.timeFormat
+                                )
+                              : scope.row[item3.prop]
+                            : defaultCellText
+                        }}
+                      </div>
+                    </template>
+                  </el-table-column>
+                </template>
+              </el-table-column>
+            </template>
+          </el-table-column>
+        </template>
+      </el-table>
+    </div>
+    <!-- 分页 -->
+    <div class="pagination-shell" v-if="pageSize != 'none'">
       <el-pagination
+        ref="pagination"
         :small="small"
         :background="background"
         :page-size="pageSize"
@@ -344,12 +347,12 @@ export default {
     // Table 的高度
     height: {
       type: [String, Number],
-      default: '-',
+      default: "-",
     },
     // Table 的最大高度
     maxHeight: {
-      tyoe: [String, Number],
-      default: '-',
+      type: [String, Number],
+      default: "-",
     },
     // 	是否为斑马纹 table
     stripe: {
@@ -364,7 +367,7 @@ export default {
     // Table 的尺寸:medium / small / mini
     size: {
       type: String,
-      default: 'small',
+      default: "small",
     },
     // 列的宽度是否自撑开
     fit: {
@@ -384,12 +387,12 @@ export default {
     // 当前行的 key，只写属性
     currentRowKey: {
       type: [String, Number],
-      default: '',
+      default: "",
     },
     // 行的 className 的回调方法
     rowClassName: {
       type: [Function, String],
-      default: '',
+      default: "",
     },
     // 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style
     rowStyle: {
@@ -399,7 +402,7 @@ export default {
     // 单元格的 className 的回调方法
     cellClassName: {
       type: [Function, String],
-      default: '',
+      default: "",
     },
     // 单元格的 style 的回调方法
     cellStyle: {
@@ -409,7 +412,7 @@ export default {
     // 表头行的 className 的回调方法
     headerRowClassName: {
       type: [Function, String],
-      default: '',
+      default: "",
     },
     // 表头行的 style 的回调方法
     headerRowStyle: {
@@ -419,7 +422,7 @@ export default {
     // 表头单元格的 className 的回调方法
     headerCellClassName: {
       type: [Function, String],
-      default: '',
+      default: "",
     },
     // 表头单元格的 style 的回调方法
     headerCellStyle: {
@@ -428,12 +431,12 @@ export default {
     },
     rowKey: {
       type: [Function, String],
-      default: 'id',
+      default: "id",
     },
     // 空数据时显示的文本内容
     emptyText: {
       type: String,
-      default: '暂无数据',
+      default: "暂无数据",
     },
     // 是否默认展开所有行
     defaultExpandAll: {
@@ -453,7 +456,7 @@ export default {
     // tooltip effect 属性
     tooltipEffect: {
       type: String,
-      default: 'dark',
+      default: "dark",
     },
     // 是否在表尾显示合计行
     showSummary: {
@@ -463,7 +466,7 @@ export default {
     // 合计行第一列的文本
     sumText: {
       type: String,
-      default: '合计',
+      default: "合计",
     },
     // 自定义的合计计算方法
     summaryMethod: Function,
@@ -493,19 +496,19 @@ export default {
     // 整体对齐方式
     align: {
       type: String,
-      default: 'left',
+      default: "left",
     },
     // 单元格没有值时的默认值
     defaultCellText: {
       type: String,
-      default: '',
+      default: "",
     },
     /**
      * 分页组件配置
      */
     layout: {
       type: String,
-      default: 'sizes, prev, pager, next, jumper, ->, total, slot',
+      default: "sizes, prev, pager, next, jumper, ->, total, slot",
     },
     // 是否使用小型分页样式
     small: {
@@ -545,17 +548,17 @@ export default {
     // 每页显示个数选择器的下拉框类名
     popperClass: {
       type: String,
-      default: '',
+      default: "",
     },
     // 替代图标显示的上一页文字
     prevText: {
       type: String,
-      default: '',
+      default: "",
     },
     // 替代图标显示的下一页文字
     nextText: {
       type: String,
-      default: '',
+      default: "",
     },
     // 是否禁用分页
     disabled: {
@@ -568,87 +571,95 @@ export default {
       default: false,
     },
   },
-  name: 'cusTable',
+  name: "exTable",
   data() {
-    return {}
+    return {
+      tableHeight: "",
+    };
   },
-  watch: {},
   created() {},
   methods: {
+    // 设置table的高度
+    setTableLayout() {
+      this.$nextTick(() => {
+        console.log("重设表格高度");
+        this.$refs.table.doLayout();
+      });
+    },
     indexMethod(index) {
-      if (this.pageSize != 'none') {
-        return index + 1 + (this.currentPage - 1) * this.pageSize
+      if (this.pageSize != "none") {
+        return index + 1 + (this.currentPage - 1) * this.pageSize;
       } else {
-        return index + 1
+        return index + 1;
       }
     },
     // 当用户手动勾选数据行的 Checkbox 时触发的事件
     select(selection, row) {
-      this.$emit('select', selection, row)
+      this.$emit("select", selection, row);
     },
     // 当用户手动勾选全选 Checkbox 时触发的事件
     selectAll(selection) {
-      this.$emit('selectAll', selection)
+      this.$emit("selectAll", selection);
     },
     // 	当选择项发生变化时会触发该事件
     selectionChange(selection) {
-      this.$emit('selectionChange', selection)
+      this.$emit("selectionChange", selection);
     },
     // 当单元格 hover 进入时会触发该事件
     cellMouseEnter(row, column, cell, event) {
-      this.$emit('cellMouseEnter', row, column, cell, event)
+      this.$emit("cellMouseEnter", row, column, cell, event);
     },
     // 当单元格 hover 退出时会触发该事件
     cellMouseLeave(row, column, cell, event) {
-      this.$emit('cellMouseLeave', row, column, cell, event)
+      this.$emit("cellMouseLeave", row, column, cell, event);
     },
     // 当某个单元格被点击时会触发该事件
     cellClick(row, column, cell, event) {
-      this.$emit('cellClick', row, column, cell, event)
+      this.$emit("cellClick", row, column, cell, event);
     },
     // 当某个单元格被双击击时会触发该事件
     cellDblclick(row, column, cell, event) {
-      this.$emit('cellDblclick', row, column, cell, event)
+      this.$emit("cellDblclick", row, column, cell, event);
     },
     // 当某一行被点击时会触发该事件
     rowClick(row, column, event) {
-      this.$emit('rowClick', row, column, event)
+      this.$emit("rowClick", row, column, event);
     },
     // 当某一行被鼠标右键点击时会触发该事件
     rowContextmenu(row, column, event) {
-      this.$emit('rowContextmenu', row, column, event)
+      this.$emit("rowContextmenu", row, column, event);
     },
     // 当某一行被双击时会触发该事件
     rowCblclick(row, column, event) {
-      this.$emit('rowCblclick', row, column, event)
+      this.$emit("rowCblclick", row, column, event);
     },
     // 当某一列的表头被点击时会触发该事件
     headerClick(column, event) {
-      this.$emit('headerClick', column, event)
+      this.$emit("headerClick", column, event);
     },
     // 当某一列的表头被鼠标右键点击时触发该事件
     headerContextmenu(column, event) {
-      this.$emit('headerContextmenu', column, event)
+      this.$emit("headerContextmenu", column, event);
     },
     // 当表格的排序条件发生变化的时候会触发该事件
     sortChange({ column, prop, order }) {
-      this.$emit('sortChange', { column, prop, order })
+      this.$emit("sortChange", { column, prop, order });
     },
     // 当表格的筛选条件发生变化的时候会触发该事件，参数的值是一个对象，对象的 key 是 column 的 columnKey，对应的 value 为用户选择的筛选条件的数组
     filterChange(filters) {
-      this.$emit('filterChange', filters)
+      this.$emit("filterChange", filters);
     },
     // 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 key 是 column 的 columnKey，对应的 value 为用户选择的筛选条件的数组
     currentTableChange(currentRow, oldCurrentRow) {
-      this.$emit('currentTableChange', currentRow, oldCurrentRow)
+      this.$emit("currentTableChange", currentRow, oldCurrentRow);
     },
     // 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 key 是 column 的 columnKey，对应的 value 为用户选择的筛选条件的数组
     headerDragend(newWidth, oldWidth, column, event) {
-      this.$emit('headerDragend', newWidth, oldWidth, column, event)
+      this.$emit("headerDragend", newWidth, oldWidth, column, event);
     },
     // 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 key 是 column 的 columnKey，对应的 value 为用户选择的筛选条件的数组
     expandChange(row, expandedRows) {
-      this.$emit('expandChange', row, expandedRows)
+      this.$emit("expandChange", row, expandedRows);
     },
     /**
      * 分页组件回调
@@ -656,29 +667,52 @@ export default {
     // pageSize 改变时会触发
     sizeChange(pageSize) {
       // this.$emit('update:pageSize', pageSize)
-      this.$emit('sizeChange', pageSize)
+      this.$emit("sizeChange", pageSize);
     },
     // 分页currentPage 改变时会触发
     currentChange(currentPage) {
       // this.$emit('updata:currentPage', currentPage)
-      this.$emit('currentChange', currentPage)
+      this.$emit("currentChange", currentPage);
     },
     // 用户点击上一页按钮改变当前页后触发
     prevClick(currentPage) {
-      this.$emit('prevClick', currentPage)
+      this.$emit("prevClick", currentPage);
     },
     // 用户点击下一页按钮改变当前页后触发
     nextClick(currentPage) {
-      this.$emit('nextClick', currentPage)
+      this.$emit("nextClick", currentPage);
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
-.cus-table {
-  width: 50%;
-  flex: 1;
-  .cus-pageination {
+// .ex-table {
+//   padding-top: 10px;
+//   display: flex;
+//   flex-direction: column;
+//   height: 50%;
+//   .table-shell {
+//     flex: 1;
+//     position: relative;
+//     .el-table {
+//       position: absolute;
+//     }
+//   }
+//   .pagination-shell {
+//     text-align: right;
+//     padding: 10px 0;
+//   }
+// }
+.ex-table {
+  .table-shell {
+    padding-top: 10px;
+    display: flex;
+    .el-table {
+      width: 10px;
+      flex: 1;
+    }
+  }
+  .pagination-shell {
     text-align: right;
     padding: 10px 0;
   }

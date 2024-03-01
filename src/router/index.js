@@ -9,6 +9,7 @@ Vue.use(newRouter);
 const routes = [
   {
     path: "/",
+    name: 'layout',
     component: () => import("@/layout/index.vue"),
     // redirect: 'canvas1',
     children: [
@@ -17,7 +18,7 @@ const routes = [
       ...styleRoute,
       {
         path: "/home",
-        name: "首页",
+        name: "home",
         component: () => import("@/views/home/home.vue"),
         meta: {},
       },
