@@ -14,7 +14,6 @@
 </template>
 <script>
 import { tableData, testApi } from "@/axios/apiFox";
-import { resetTableHeight } from "@/utils/general";
 export default {
   name: "search",
   data() {
@@ -63,6 +62,7 @@ export default {
         showIndex: true,
         selection: true,
         border: true,
+        loading: false,
         currentPage: 1,
         pageSize: 10,
         total: 20,
@@ -96,13 +96,15 @@ export default {
   },
   methods: {
     getTableData() {
+      this.tableConfig.loading = true;
       tableData()
         .then((res) => {
           this.tableConfig.tableData = res.data;
-          // this.tableConfig.maxHeight = 400;
-          this.$refs.exTable.setTableLayout();
         })
-        .catch((error) => {});
+        .catch((error) => {})
+        .finally(() => {
+          this.tableConfig.loading = false;
+        });
       testApi()
         .then((res) => {
           // console.log(this.)
@@ -126,5 +128,7 @@ export default {
 <style lang="scss" scoped>
 .search {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

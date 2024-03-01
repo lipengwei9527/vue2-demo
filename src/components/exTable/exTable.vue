@@ -35,6 +35,8 @@
         :indent="indent"
         :lazy="lazy"
         :load="load"
+        v-loading="loading"
+        element-loading-text="拼命加载中"
         :tree-props="treeProps"
         @select="select"
         @select-all="selectAll"
@@ -489,6 +491,10 @@ export default {
     },
     // 加载子节点数据的函数
     load: Function,
+    loading: {
+      type: Boolean,
+      default: false,
+    },
     treeProps: {
       type: Object,
       default: () => ({}),
@@ -686,30 +692,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// .ex-table {
-//   padding-top: 10px;
-//   display: flex;
-//   flex-direction: column;
-//   height: 50%;
-//   .table-shell {
-//     flex: 1;
-//     position: relative;
-//     .el-table {
-//       position: absolute;
-//     }
-//   }
-//   .pagination-shell {
-//     text-align: right;
-//     padding: 10px 0;
-//   }
-// }
 .ex-table {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   .table-shell {
-    padding-top: 10px;
-    display: flex;
+    flex: 1;
+    position: relative;
     .el-table {
-      width: 10px;
-      flex: 1;
+      height: 100%;
+      position: absolute;
     }
   }
   .pagination-shell {
@@ -717,4 +710,18 @@ export default {
     padding: 10px 0;
   }
 }
+// .ex-table {
+//   .table-shell {
+//     padding-top: 10px;
+//     display: flex;
+//     .el-table {
+//       width: 10px;
+//       flex: 1;
+//     }
+//   }
+//   .pagination-shell {
+//     text-align: right;
+//     padding: 10px 0;
+//   }
+// }
 </style>
