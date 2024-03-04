@@ -3,7 +3,7 @@
     <!-- 顶部菜单 -->
     <ex-menu
       mode="horizontal"
-      :menuList="topMenuList"
+      :menuList="topMenu"
       :activeIndex="topActive"
       @select="selectTopMenu"
     ></ex-menu>
@@ -12,9 +12,9 @@
       <ex-menu
         class="left-menu"
         mode="vertical"
-        :menuList="leftMenuList"
+        :menuList="leftMenu"
         :activeIndex="leftActive"
-        @select="selectLeftMenu"
+        @select="changeMenu"
       ></ex-menu>
       <!-- 交易页面 -->
       <div class="trade-page">
@@ -26,46 +26,26 @@
   </div>
 </template>
 <script>
-import menu from "./menu";
-import { dataTransTree } from "@/utils/tree";
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   name: "layout",
   data() {
     return {
-      allMenus: [],
-      topActive: "",
-      leftActive: "",
       path: "",
-      cacheViews: [], //缓存的路由
-      topMenuList: [],
-      leftMenuList: [],
     };
   },
+  computed: {
+    ...mapState("menu", ["menus", "topActive", "leftActive"]),
+    ...mapGetters("menu", ["topMenu", "leftMenu"]),
+  },
   created() {
-    this.allMenus = dataTransTree(menu);
-    this.topMenuList = this.allMenus.map((item) => {
-      return {
-        id: item.id,
-        pid: item.pid,
-        title: item.title,
-        path: item.path,
-      };
-    });
-    this.topActive = this.topMenuList[0].path;
-    let leftMenu = this.allMenus[0].children;
-    this.leftMenuList = leftMenu;
-    this.leftActive = leftMenu[0].path;
-    this.$router.push(this.leftActive);
+    this.resetActive();
   },
   methods: {
-    selectTopMenu(index, indexPath) {
-      this.leftMenuList = this.allMenus.find(
-        (item) => item.path == index
-      ).children;
-    },
-    selectLeftMenu(index, indexPath) {
-      this.leftActive = index;
-      this.$router.push(index);
+    ...mapActions("menu", ["resetActive", "selectTopMenu", "selectLeftMenu"]),
+    changeMenu(index) {
+      this.selectLeftMenu(index);
+      this.$openTab(index);
     },
   },
 };

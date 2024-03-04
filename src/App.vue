@@ -5,22 +5,25 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
 export default {
-  name: 'App',
+  name: "App",
   data() {
-    return {}
+    return {};
   },
   computed: {
-    ...mapState('app', ['appState']),
+    ...mapState("app", ["appState"]),
   },
   created() {
-    this.setAppState()
+    this.setAppState();
+  },
+  destroyed() {
+    this.removeAppState();
   },
   methods: {
-    ...mapActions('app', ['setAppState']),
+    ...mapActions("app", ["setAppState", "removeAppState"]),
   },
-}
+};
 </script>
 
 <style></style>

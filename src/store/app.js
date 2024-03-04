@@ -10,7 +10,7 @@ const state = {
 const getters = {}
 const mutations = {
   // 添加程序状态的监听事件
-  set_app_state (state) {
+  set_app_state(state) {
     // 页面是否隐藏(页面最小化/被完全遮挡为页面隐藏)
     state.appState.visibilityState = document.visibilityState
     document.addEventListener('visibilitychange', () => {
@@ -42,18 +42,24 @@ const mutations = {
       }
     })
 
-    // console.log('app当前状态：' + '\n'
-    //   + '   版本：' + state.appState.version + '\n'
-    //   + '   页面是否可见：' + state.appState.visibilityState + '\n'
-    //   + '   焦点是否在该页面：' + state.appState.isFocus + '\n'
-    //   + '   是否联网：' + state.appState.onLine + '\n'
-    //   + '   是否全屏：' + state.appState.isFullScreen + '\n'
-    // )
+    console.log('app当前状态：' + '\n'
+      + '   版本：' + state.appState.version + '\n'
+      + '   页面是否可见：' + state.appState.visibilityState + '\n'
+      + '   焦点是否在该页面：' + state.appState.isFocus + '\n'
+      + '   是否联网：' + state.appState.onLine + '\n'
+      + '   是否全屏：' + state.appState.isFullScreen + '\n'
+    )
   },
+  remove_app_state() {
+    console.log('移除app中的事件监听')
+  }
 }
 const actions = {
-  setAppState ({ commit }) {
-    commit('set_app_state')
+  setAppState({ commit }) {
+    // commit('set_app_state')
+  },
+  removeAppState({ commit }) {
+    commit('remove_app_state')
   },
 }
 export default {

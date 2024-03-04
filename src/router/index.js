@@ -1,6 +1,6 @@
 import Vue from "vue";
-import newRouter from "@/utils/router";
-
+import newRouter, { setRouteInfo } from "@/utils/router";
+import menuStore from '@/store/menu'
 // 路由
 import comsRoute from "./comsRoute";
 import noteRoute from "./noteRoute";
@@ -22,18 +22,6 @@ const routes = [
         component: () => import("@/views/home/home.vue"),
         meta: {},
       },
-      // {
-      //   path: "/canvas/canvas1",
-      //   name: "canvas1",
-      //   component: () => import("@/views/canvas/canvas1.vue"),
-      //   meta: {},
-      // },
-      // {
-      //   path: "/language/i18n",
-      //   name: "i18n",
-      //   component: () => import("@/views/i18n/i18n.vue"),
-      //   meta: {},
-      // },
     ],
   },
 ];
@@ -46,6 +34,17 @@ export const createRouter = () =>
     routes,
   });
 const router = createRouter();
+
+router.beforeEach((to, form, next) => {
+  next()
+})
+router.afterEach((to, from) => {
+  // 设置选中的菜单
+  let { topActive, leftActive } = menuStore.state
+  if (topActive && leftActive) {
+    setRouteInfo({ topActive, leftActive })
+  }
+})
 
 // 重设路由
 export function resetRouter() {

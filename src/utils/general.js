@@ -1,5 +1,4 @@
-import { Message } from 'element-ui'
-import appVersion from '@config/version.json'
+import { v4 as uuidv4 } from 'uuid'
 /**
  * 分割节点：
  * 以nodeList中的元素为节点，将targetList数组中的元素分割开来
@@ -203,18 +202,19 @@ export function deepClone(data) {
   }
   return result
 }
-// 刷新界面
-export function refreshApp() {
-  let version = localStorage.getItem('version')
-  if (!version || appVersion.version != version) {
-    localStorage.clear()
-    window.localStorage.setItem('version', appVersion.version)
-    location.reload()
-  }
+
+export function getUUID() {
+  return uuidv4()
 }
 
+// // 刷新界面
+// export function refreshApp() {
+//   let version = localStorage.getItem('version')
+//   if (!version || appVersion.version != version) {
+//     localStorage.clear()
+//     window.localStorage.setItem('version', appVersion.version)
+//     location.reload()
+//   }
+// }
 
-export function show() {
-  Message.error('报错')
-}
 

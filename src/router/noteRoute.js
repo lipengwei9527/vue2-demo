@@ -14,4 +14,14 @@ export default [
         name: "applyDraggable",
         component: () => import("@/views/note/applyDraggable/applyDraggable.vue")
     },
+    {
+        path: "/note/routeApply",
+        name: "routeApply",
+        component: () => import("@/views/note/routeApply/routeApply.vue")
+    },
+    {
+        path: "/note/routerInfo",
+        name: "routerInfo",
+        component: () => import("@/views/note/routeApply/routerInfo.vue")
+    },
 ]

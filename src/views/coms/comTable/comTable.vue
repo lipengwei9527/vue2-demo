@@ -7,6 +7,8 @@
     <keep-alive>
       <component :is="activeName"></component>
     </keep-alive>
+    <el-button @click="back">history.back</el-button>
+    <el-button @click="reload">location.reload</el-button>
   </div>
 </template>
 <script>
@@ -25,7 +27,14 @@ export default {
   computed: {},
   watch: {},
   mounted() {},
-  methods: {},
+  methods: {
+    back() {
+      history.back();
+    },
+    reload() {
+      history.back();
+    },
+  },
 };
 </script>
 <style lang="scss" scoped></style>

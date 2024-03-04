@@ -14,7 +14,6 @@ export default {
       value: "",
     };
   },
-  mounted() {},
   methods: {
     encryptRSA() {
       let encry = encryptRSA(this.value);

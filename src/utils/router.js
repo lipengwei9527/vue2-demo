@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router'
-import router from "@/router"
+import router from '@/router'
 //先把VueRouter.prototype身上的push|replace方法进行保存一份
 export const orgPush = VueRouter.prototype.push;
 export const orgReplace = VueRouter.prototype.replace;
@@ -38,17 +38,23 @@ VueRouter.prototype.replace = function (location, resolve, reject) {
   }
 }
 
-// 跳转路由
-export function openTab (option) {
-  if (!option.path.startsWith('/')) {
-    option.path = '/' + option.path
-  }
-  let v8id = new Date().getTime()
 
-  router.push({
-    path: option.path,
-    query: { v8id: option.query }
-  })
+export function openTab(option) {
+  router.push(option)
+}
+
+export function backTab(option) {
+
+}
+
+export function setRouteInfo(option) {
+  let routeInfo = getRouteInfo()
+  let value = Object.assign(routeInfo, option)
+  return localStorage.setItem('routeInfo', JSON.stringify(value))
+}
+
+export function getRouteInfo() {
+  return JSON.parse(localStorage.getItem('routeInfo')) || {}
 }
 
 export default VueRouter
