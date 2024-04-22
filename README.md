@@ -1,24 +1,10 @@
-# vue-template
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+##################################################################################################################
+1、使用的包管理器为pnpm
+##################################################################################################################
+命令：
+#pnpm dev
+开发运行
+#pnpm build
+打包生产
+##################################################################################################################
+./config/serverConfig.js为不同环境的proxy配置

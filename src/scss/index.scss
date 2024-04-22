@@ -1,7 +1,92 @@
-$font: 18px;
-$family: 20px;
+// 全局所有的scss文件都创建在该文件夹下，方便查找
+// 全局公共样式变量
+@import "./variate.scss";
+// 滚动条样式
+@import "./scrollbar.scss";
 
 * {
-  font-size: $font;
-  // font-family: 'KaiTi';
+  padding: 0;
+  margin: 0;
+  font-size: $mainText_fontSize;
+  color: $mainText_color;
 }
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+}
+
+/**********************页面整体布局样式****************************/
+.layout {
+  height: 100%;
+  background-color: #f4f4f5;
+  .layout-page {
+    height: calc(100% - 60.8px);
+    display: flex;
+    .left-menu {
+      min-width: 200px;
+      width: 15%;
+      overflow: auto;
+    }
+    .trade-page {
+      background-color: #fff;
+      flex: 1;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-y: hidden;
+    }
+  }
+}
+/***********************************************************/
+
+/*******************交易页面公共样式***************************/
+
+/**********************************************/
+
+/***********超出指定行行隐藏****************/
+.hide-more-one {
+  overflow: hidden; //隐藏超出的文本内容
+  text-overflow: ellipsis; //文本超出时显示省略号
+  white-space: nowrap; //不换行
+}
+
+.hide-more-two {
+  display: -webkit-box; //必须结合的属性，将对象作为弹性伸缩盒子模型显示
+  -webkit-box-orient: vertical; //必须结合的属性，设置或检索伸缩盒对象的子元素的排列方式
+  -webkit-line-clamp: 2; // 指定的行数
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /**
+  word-break-换行方式:
+    normal:单词整体换行(默认),
+    break-all:单词内换行,
+    keep-all:只能在半角空格或连字符处换行,
+  */
+  // word-break: normal;
+}
+
+.hide-more-three {
+  display: -webkit-box; //必须结合的属性，将对象作为弹性伸缩盒子模型显示
+  -webkit-box-orient: vertical; //必须结合的属性，设置或检索伸缩盒对象的子元素的排列方式
+  -webkit-line-clamp: 3; // 指定的行数
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hide-more-four {
+  display: -webkit-box; //必须结合的属性，将对象作为弹性伸缩盒子模型显示
+  -webkit-box-orient: vertical; //必须结合的属性，设置或检索伸缩盒对象的子元素的排列方式
+  -webkit-line-clamp: 4; // 指定的行数
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/**********************************************/
