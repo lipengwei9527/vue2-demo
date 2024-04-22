@@ -8,7 +8,7 @@ import { isThousands } from './validate.js'
  * @param {要转换的时间} value 
  * @param {转换之后的格式} format 
 */
-export function formatDate (value, format = 'yyyy-MM-DD') {
+export function formatDate(value, format = 'yyyy-MM-DD') {
   if (!value || value == null) return
 
   if (Number(value) == value) {
@@ -23,11 +23,10 @@ export function formatDate (value, format = 'yyyy-MM-DD') {
  * 获取当前时间并指定返回的格式
  * @param {要返回的时间的格式} format 
 */
-export function curDate (format) {
+export function curDate(format) {
   return moment().format(format)
 }
 /***********************************************************/
-
 
 // 数字格式化
 /***********************************************************/
@@ -37,7 +36,7 @@ export function curDate (format) {
  * @param {保留的小数位数} length 
  * @returns {String} 千分位的字符串格式的数字
  */
-export function digitToThousands (num, length) {
+export function digitToThousands(num, length) {
   if (Number(num) != num) {
     throw new Error('不是数字或者数字类型的字符串')
   }
@@ -61,7 +60,7 @@ export function digitToThousands (num, length) {
  * @param {保留的小数位数} length 
  * @returns {String}
  */
-export function thousandsToDigit (str, length) {
+export function thousandsToDigit(str, length) {
   if (!isThousands(str)) {
     throw new Error('不是千分位格式')
   }

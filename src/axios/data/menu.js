@@ -52,4 +52,14 @@ export default [
         path: "/note/routeApply",
         title: "路由"
     },
+    {
+        pid: "003",
+        path: "/note/applyQrcode",
+        title: "二维码"
+    },
+    {
+        pid: "003",
+        path: "/note/applyImage",
+        title: "图片"
+    },
 ]

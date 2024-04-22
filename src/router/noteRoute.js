@@ -24,4 +24,14 @@ export default [
         name: "routerInfo",
         component: () => import("@/views/note/routeApply/routerInfo.vue")
     },
+    {
+        path: "/note/applyQrcode",
+        name: "applyQrcode",
+        component: () => import("@/views/note/applyQrcode/applyQrcode.vue")
+    },
+    {
+        path: "/note/applyImage",
+        name: "applyImage",
+        component: () => import("@/views/note/applyImage/applyImage.vue")
+    },
 ]

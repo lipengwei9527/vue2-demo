@@ -170,15 +170,16 @@ export function resetTableHeight(_this, refName, height = 0) {
  * @param {要指定长度的字符串} str 
  * @param {指定的长度} length 
  * @param {不够指定长度时填充的字符串默认填充0} sign 
+ * @param {在前还是后补充字符串：true-之前，false-之后} after
  * @returns {String} 指定长度的字符串
  */
-export function getAssignChar(str, length, sign = '0') {
-  if (str.length < length) {
-    return str + new Array(length - str.length).join(sign)
-  } else if (str.length > length) {
+export function getAssignChar(str, length, sign = '0', after = false) {
+  if (str.length < length && after) {
+    let fillStr = new Array(length - str.length).join(sign)
+    return after ? fillStr + str : str + fillStr
+  } else if (str.length >= length) {
     return str.slice(0, length)
   }
-  return str
 }
 
 /**
@@ -203,18 +204,8 @@ export function deepClone(data) {
   return result
 }
 
+// 获取uuid
 export function getUUID() {
   return uuidv4()
 }
-
-// // 刷新界面
-// export function refreshApp() {
-//   let version = localStorage.getItem('version')
-//   if (!version || appVersion.version != version) {
-//     localStorage.clear()
-//     window.localStorage.setItem('version', appVersion.version)
-//     location.reload()
-//   }
-// }
-
 

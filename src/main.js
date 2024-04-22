@@ -1,28 +1,28 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from '@/router'
-import store from '@/store'
-import elementUi from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import * as echarts from 'echarts'
-import i18n from "@/i18n/index.js"
+import Vue from "vue";
+import App from "./App.vue";
+import router from "@/router";
+import store from "@/store";
+import elementUi from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+import * as echarts from "echarts";
+import i18n from "@/i18n/index.js";
 
 // 全部整合样式
-import '@/scss/index.scss'
+import "@/scss/index.scss";
 // 全局组件
-import '@/components'
+import "@/components";
 // 要绑定到vue上的方法统一由该文件引入
-import '@/utils'
+import "@/utils";
 
-Vue.config.productionTip = false
-Vue.prototype.$echarts = echarts
-Vue.prototype.$bus = new Vue()
+Vue.config.productionTip = false;
+Vue.prototype.$echarts = echarts;
+Vue.prototype.$bus = new Vue();
 
-Vue.use(elementUi)
+Vue.use(elementUi);
 
 new Vue({
-  render: h => h(App),
+  render: (h) => h(App),
   router,
   store,
-  i18n
-}).$mount('#app')
+  i18n,
+}).$mount("#app");

@@ -20,6 +20,9 @@ export default {
       count: 1,
     };
   },
+  created() {
+    console.log(this.$i18n);
+  },
   methods: {
     changeLanguage() {
       let local = localStorage.getItem("local");

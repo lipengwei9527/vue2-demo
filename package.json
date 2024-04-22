@@ -19,6 +19,7 @@
     "element-ui": "^2.15.13",
     "jsencrypt": "^3.3.2",
     "moment": "^2.29.4",
+    "qrcodejs2": "^0.0.2",
     "sass": "^1.59.3",
     "sass-loader": "^13.2.0",
     "uuid": "^9.0.0",
